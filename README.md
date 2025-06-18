@@ -1,4 +1,4 @@
-# ConfigEdit
+# ConfEdit
 
 Small homebrew to edit config files on the Nintendo DS.
 
@@ -20,16 +20,16 @@ No release yet, still WIP
 
 1. Set up devkitPro by following official guide:  
 [https://devkitpro.org/wiki/Getting_Started](https://devkitpro.org/wiki/Getting_Started)
-2. Build ConfigEdit : 
+2. Build ConfEdit : 
 ```bash
 # Clone this repository:
-git clone https://github.com/bunigost/ConfigEdit.git
+git clone https://github.com/bunigost/ConfEdit.git
 # Navigate to the project folder:
-cd ConfigEdit
+cd ConfEdit
 # Build:
 make
 ```
-5. Copy `ConfigEdit.nds` to your Nintendo DS.
+5. Copy `ConfEdit.nds` to your Nintendo DS.
 
 ## Usage
 
@@ -38,10 +38,10 @@ File Browser :
 - D-Pad Left/Right : scroll faster 
 - A : Open directory or file
 - B : Close directory
-- Start : Close ConfigEdit
+- Start : Close ConfEdit
 
 Text Editor :
 - D-Pad : move the cursor
 - Use the touch keyboard to insert or delete characters
-- Start : save the file
+- A : save the file
 - B : close file without saving

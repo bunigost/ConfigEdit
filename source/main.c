@@ -415,10 +415,10 @@ for (int i = 0; i < MAX_VISIBLE_LINES; i++) {
             repeat_counter = 0;
         }
 
-        if (keys_down & KEY_START) {
+        if (keys_down & KEY_A) {
             save_file(filepath, file_lines, total_lines);
             consoleClear();
-            iprintf("File saved!\nPress B to exit or continue editing.");
+            iprintf("File saved!\nPress B to return to text editor");
             while (1) {
                 scanKeys();
                 if (keysDown() & KEY_B) break;
