@@ -19,7 +19,7 @@ No release yet, still WIP
 ## Building
 
 1. Set up devkitPro by following official guide:  
-`[https://devkitpro.org/wiki/Getting_Started](https://devkitpro.org/wiki/Getting_Started)`
+[https://devkitpro.org/wiki/Getting_Started](https://devkitpro.org/wiki/Getting_Started)
 2. Build ConfigEdit : 
 ```bash
 # Clone this repository:
