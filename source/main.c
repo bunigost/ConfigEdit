@@ -8,25 +8,20 @@
 
 // Constants
 #define SCREEN_LINES      24      // Number of visible lines on screen
+#define TOP_MARGIN 3      // Top margin for header
+#define MAX_VISIBLE_LINES (SCREEN_LINES - TOP_MARGIN)
 
 // Browser
 #define MAX_ENTRIES       512     // Max number of directory entries
 #define MAX_PATH_LEN      256     // Max length for file paths
-#define SKIP_LINES        20      // Number of lines to skip on left/right key press
-#define BROWSER_TOP_MARGIN 3      // Top margin for header
-#define BROWSER_MAX_VISIBLE_LINES (SCREEN_LINES - BROWSER_TOP_MARGIN)
 
+#define SKIP_LINES        20      // Number of lines to skip on left/right key press
 #define BROWSER_REPEAT_DELAY 15
 #define BROWSER_REPEAT_RATE 3
-
-
 
 // Editor
 #define MAX_LINES         1024    // Max lines in a text file
 #define MAX_LINE_LENGTH   256     // Max length of a single line
-#define EDITOR_TOP_MARGIN 2       // Top margin for header
-#define EDITOR_MAX_VISIBLE_LINES (SCREEN_LINES - EDITOR_TOP_MARGIN)
-
 
 #define EDITOR_REPEAT_DELAY 20
 #define EDITOR_REPEAT_RATE 4
@@ -142,11 +137,11 @@ void draw_directory(int cursor, int scroll_offset) {
 
     // Calculate visible range based on scroll
     int start = scroll_offset;
-    int end = (start + BROWSER_MAX_VISIBLE_LINES < entry_count) ? start + BROWSER_MAX_VISIBLE_LINES : entry_count;
+    int end = (start + MAX_VISIBLE_LINES < entry_count) ? start + MAX_VISIBLE_LINES : entry_count;
 
     // Print each directory entry on its own line, starting at line TOP_MARGIN (1-based)
     for (int i = start; i < end; i++) {
-        int line_num = i - start + BROWSER_TOP_MARGIN + 1;  // +1 because ANSI lines start at 1
+        int line_num = i - start + TOP_MARGIN + 1;  // +1 because ANSI lines start at 1
         iprintf("\x1b[%d;1H", line_num);
 
         // Clear the entire line to avoid leftover characters
@@ -267,16 +262,16 @@ void view_text_file(const char *filepath) {
 
         if (cursor_y < scroll)
             scroll = cursor_y;
-        if (cursor_y >= scroll + EDITOR_MAX_VISIBLE_LINES)
-            scroll = cursor_y - EDITOR_MAX_VISIBLE_LINES + 1;
+        if (cursor_y >= scroll + MAX_VISIBLE_LINES)
+            scroll = cursor_y - MAX_VISIBLE_LINES + 1;
 
-for (int i = 0; i < EDITOR_MAX_VISIBLE_LINES; i++) {
+for (int i = 0; i < MAX_VISIBLE_LINES; i++) {
     int line_index = scroll + i;
     if (line_index >= total_lines) break;
     const char *line = file_lines[line_index];
 
     // Move to the correct screen line (with offset)
-    iprintf("\x1b[%d;1H", i + EDITOR_TOP_MARGIN + 1); // ANSI is 1-indexed
+    iprintf("\x1b[%d;1H", i + TOP_MARGIN + 1); // ANSI is 1-indexed
 
     if (line_index == cursor_y) {
         for (int c = 0; c < cursor_x && line[c] != '\0'; c++)
